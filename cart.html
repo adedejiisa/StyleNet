@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STYLENET-CART</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+  <style>
+    :root {
+      --primary: #28a745;
+      --danger: #e63946;
+      --dark: #333;
+      --light: #f8f9fa;
+      --shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0; 
+      padding: 0;
+      background: var(--light);
+      color: var(--dark);
+    }
+
+header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: #6c63ff;
+            backdrop-filter: blur(10px);
+            border-bottom: 5px solid;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+    .cart-container {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      margin-top: 20%;
+    }
+
+    .cart-item {
+       background: #ddd;
+       margin-bottom: 5%;
+      padding: 10px;
+      border-radius: 10px;
+      display: grid;
+      grid-template-columns: 100px 1fr 100px 150px 50px;
+      align-items: center;
+      gap: 15%;
+      border-bottom: 2px solid #00ADB5;
+      padding: 15px 0;
+      transition: background 0.2s;
+    }
+
+    .cart-item:hover {
+      background: #fafafa;
+    }
+
+    .cart-item img {
+      width: 80px;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .cart-item h4 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 600;
+      color: #222;
+    }
+
+    .cart-item p {
+      font-weight: bold;
+      color: #444;
+    }
+
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .quantity-controls button {
+      padding: 5px 12px;
+      border: none;
+      border-radius: 6px;
+      background: white;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.2s;
+    }
+
+    .quantity-controls button:hover {
+      background: #bbb;
+    }
+
+    .remove-btn {
+      background: #6c63ff;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: 0.2s;
+      width: 70%;
+      justify-self: center;
+    }
+
+    .remove-btn:hover {
+      background: #6c6bb3;
+    }
+
+    .cart-total {
+      text-align: right;
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--dark);
+    }
+
+    .checkout-btn {
+      display: block;
+      width: 100%;
+      background: #6c6bbf;
+      color: white;
+      padding: 15px;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      border-radius: 12px;
+      margin-top: 25px;
+      transition: 0.3s;
+      box-shadow: var(--shadow);
+    }
+
+    .checkout-btn:hover {
+      background: #218838;
+    }
+a{
+  text-decoration: none;
+}
+        .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      margin-left: 50%;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links li a {
+      text-decoration: none;
+      color: black;
+    }
+
+    /* Mobile menu button */
+    .menu-btn {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+    
+    /* Responsive */
+    @media (max-width: 700px) {
+      .cart-item {
+        grid-template-columns: 80px 1fr;
+        grid-template-rows: auto auto auto;
+        gap: 10px;
+        text-align: left;
+      }
+      .cart-item p, 
+      .quantity-controls, 
+      .remove-btn {
+        grid-column: 1 / -1;
+      }
+      .cart-total {
+        text-align: center;
+      }
+            .nav-links {
+        display: none;
+        flex-direction: column;
+        background: #222;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 90%;
+        padding: 1rem;
+        border-radius: 8px;
+      }
+      .nav-links li a {
+        color: white;
+        display: block;
+        padding: 10px 0;
+      }
+      .menu-btn {
+        display: block;
+        position: absolute;
+        right: 20%;
+        align-content:  center;
+      }
+      .nav-links.active {
+        display: flex;
+      }
+    }
+
+  </style>
+</head>
+<body>
+    <header>
+    <div class="logo"> 🛒 Your Cart</div>
+    <nav>
+      <i class="fa-solid fa-bars menu-btn"></i>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="product.html">Product</a></li>
+        <li><a href="home.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div class="cart-container">
+    <div id="cart-items"></div>
+    <p class="cart-total">Total: $0</p>
+    <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+    
+    <a href="product.html"><button type="submit" class="checkout-btn">Continue Shopping</button></a>
+  </div>
+
+  <script>
+      document.querySelector(".menu-btn").addEventListener("click", () => {
+      document.querySelector(".nav-links").classList.toggle("active");
+    });
+    // ✅ Load cart from localStorage
+    function loadCart() {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      let cartItemsContainer = document.getElementById("cart-items");
+      cartItemsContainer.innerHTML = "";
+      let total = 0;
+
+      cart.forEach(item => {
+        total += item.price * item.quantity;
+        let div = document.createElement("div");
+        div.className = "cart-item";
+div.innerHTML = `
+
+<img src="${item.image}" 
+     alt="${item.title}" 
+     onerror="this.onerror=null; this.src='${item.images ? item.images[0] : '600x400.svg'}'; 
+              this.onerror=function(){ this.src='fallback2.jpg'; }">
+       
+  <h4>${item.title}</h4>
+  <p>$${item.price.toFixed(2)}</p>
+  <div class="quantity-controls">
+    <button class="add" onclick="updateQuantity(${item.id}, -1)">-</button>
+    <span>${item.quantity}</span>
+    <button class="add" onclick="updateQuantity(${item.id}, 1)">+</button>
+  </div>
+  <button class="remove-btn" onclick="removeFromCart(${item.id})">X</button>
+`;
+        cartItemsContainer.appendChild(div);
+      });
+
+      document.querySelector(".cart-total").textContent = "Total: $" + total.toFixed(2);
+    }
+
+    // ✅ Update item quantity
+    function updateQuantity(id, change) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      let item = cart.find(p => p.id === id);
+      if (item) {
+        item.quantity += change;
+        if (item.quantity <= 0) {
+          cart = cart.filter(p => p.id !== id);
+        }
+        localStorage.setItem("cart", JSON.stringify(cart));
+        loadCart();
+      }
+    }
+   // ✅ Remove item from cart
+    function removeFromCart(id) {
+     let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart = cart.filter(p => p.id !== id);
+     localStorage.setItem("cart", JSON.stringify(cart));
+     loadCart();
+   }
+
+    // ✅ Checkout (clear cart)
+    function checkout() {
+      if (confirm("are you sure you want to continue")) {
+        window.location.replace('check.html');
+        loadCart();
+      }
+    }
+
+    // Load cart when page opens
+    loadCart();
+  </script>
+</body>
+</html>
