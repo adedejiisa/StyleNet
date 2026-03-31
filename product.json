@@ -1,0 +1,177 @@
+[
+  {
+    "id": 1,
+    "name": "Cotton Shirt",
+    "image": "https://www.uniqlo.com/us/en/men/shirts-and-polos/casual-shirts/images/cotton-linen-shirt.jpg",
+    "details": "Trendy cotton shirt, summer collection",
+    "price": "50"
+  },
+  {
+    "id": 2,
+    "name": "Clothes Rack",
+    "image": "https://m.media-amazon.com/images/I/71ZkzFZfXhL._AC_SL1500_.jpg",
+    "details": "Assorted jackets, shirts, and dresses",
+    "price": "120"
+  },
+  {
+    "id": 3,
+    "name": "Fabric Rolls",
+    "image": "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    "details": "Colorful fabrics stacked neatly",
+    "price": "80"
+  },
+  {
+    "id": 4,
+    "name": "Luxury Coat Collection",
+    "image": "https://www.neimanmarcus.com/content/dam/nm/static-assets/images/product/Neutral-Womens-Designer-Coats.jpg",
+    "details": "Coats, jackets, and dresses in neutral tones",
+    "price": "300"
+  },
+  {
+    "id": 5,
+    "name": "Knit Fabrics",
+    "image": "https://images.unsplash.com/photo-1585487000160-6ebcfceb0d26?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    "details": "Man-made knit fabrics in multiple colors",
+    "price": "60"
+  },
+  {
+    "id": 6,
+    "name": "Boutique Display",
+    "image": "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    "details": "Mannequins with stylish outfits",
+    "price": "250"
+  },
+  {
+    "id": 7,
+    "name": "Clothing Line Rack",
+    "image": "https://m.media-amazon.com/images/I/71ZkzFZfXhL._AC_SL1500_.jpg",
+    "details": "Shirts, dresses, and pants neatly arranged",
+    "price": "100"
+  },
+  {
+    "id": 8,
+    "name": "Men’s Clothing Set",
+    "image": "https://www.zara.com/static/images/product/regular-fit-cotton-shirt.jpg",
+    "details": "Sweater, jeans, shorts, and fleece jacket",
+    "price": "200"
+  },
+  {
+    "id": 9,
+    "name": "Cotton Fabrics",
+    "image": "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    "details": "Types of cotton fabric in circular arrangement",
+    "price": "70"
+  },
+  {
+    "id": 10,
+    "name": "Fashion Accessories",
+    "image": "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    "details": "Scarves, handbags, shoes, and dresses",
+    "price": "150"
+  },
+  {
+    "id": 11,
+    "name": "UNIQLO Collection",
+    "image": "https://uniqlo.scene7.com/is/image/UNIQLO/us-en-uniqlo-collection-masterpiece",
+    "details": "Masterpiece clothing and accessories",
+    "price": "180"
+  },
+  {
+    "id": 12,
+    "name": "Clothing Catalog",
+    "image": "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    "details": "Multi-purpose catalog template design",
+    "price": "40"
+  },
+  {
+    "id": 13,
+    "name": "Children’s Coats",
+    "image": "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    "details": "Red and blue floral patterned coats",
+    "price": "90"
+  },
+  {
+    "id": 14,
+    "name": "Men’s Fashion Collage",
+    "image": "https://www.zara.com/static/images/man-shirts-casual.jpg",
+    "details": "H&M men’s outfits casual to semi-formal",
+    "price": "220"
+  },
+  {
+    "id": 15,
+    "name": "Clothing Rack Display",
+    "image": "https://m.media-amazon.com/images/I/71ZkzFZfXhL._AC_SL1500_.jpg",
+    "details": "Brand new clothes arranged on hangers",
+    "price": "130"
+  },
+  {
+    "id": 16,
+    "name": "Indonesian Kebaya Bali",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Kebaya_Bali.jpg",
+    "details": "Traditional Balinese kebaya gown",
+    "price": "500"
+  },
+  {
+    "id": 17,
+    "name": "Indonesian Wedding Dress",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Indonesian_wedding_dress.jpg",
+    "details": "Modern Indonesian wedding gown with lace",
+    "price": "1200"
+  },
+  {
+    "id": 18,
+    "name": "Elegant Batik Dress",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/6/6d/Batik_dress.jpg",
+    "details": "Brown batik dress with gold patterns",
+    "price": "800"
+  },
+  {
+    "id": 19,
+    "name": "Black Kebaya",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/8/8d/Kebaya_black.jpg",
+    "details": "Traditional black kebaya with gold embroidery",
+    "price": "600"
+  },
+  {
+    "id": 20,
+    "name": "Balinese Bride Dress",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Balinese_bride.jpg",
+    "details": "Pink and purple Balinese gown with gold embroidery",
+    "price": "1000"
+  },
+  {
+    "id": 21,
+    "name": "Indonesian Batik Wedding",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Batik_wedding.jpg",
+    "details": "Modern kebaya with lace and long train",
+    "price": "1500"
+  },
+  {
+    "id": 22,
+    "name": "Golden Kebaya",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Kebaya_gold.jpg",
+    "details": "Gold and black kebaya with lace patterns",
+    "price": "950"
+  },
+  {
+    "id": 23,
+    "name": "Blue Kebaya",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/6/6d/Kebaya_blue.jpg",
+    "details": "Blue and gold kebaya with embroidery",
+    "price": "700"
+  },
+  {
+    "id": 24,
+    "name": "Modern Green Kebaya",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Kebaya_green.jpg",
+    "details": "Green sash kebaya with flowing skirt",
+    "price": "850"
+  },
+  {
+    "id": 25,
+    "name": "Indonesian Bride Gown",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/8/8d/Indonesian_bride_gown.jpg",
+    "details": "White wedding gown with lace and beadwork",
+    "price": "2000"
+  }
+]

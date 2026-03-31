@@ -3,166 +3,483 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Checkout - STYLENET</title>
-  <link rel="stylesheet" href="style.css">
+  <title>STYLENET - Checkout</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    body {
-      font-family: sans-serif;
+    :root {
+      --primary: #2C3E50;
+      --secondary: #ECF0F1;
+      --accent: #E74C3C;
+      --text: #2C3E50;
+    }
+
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--secondary);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* Header */
     header {
-      background: #6c6bb7;
+      background: var(--primary);
       color: white;
-      padding: 10px;
+      padding: 1.2rem 5%;
       text-align: center;
-      height: 10%;
-      
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
+
+    header h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    /* Main Container */
     .container {
-      max-width: 900px;
-      margin: 20px auto;
-      padding: 20px;
+      max-width: 1100px;
+      margin: 100px auto 60px;
+      padding: 0 5%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
     }
+
+    /* Left Column - Order Summary */
+    .order-summary {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      height: fit-content;
+    }
+
+    .order-summary h2 {
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+    }
+
+    #cartItems {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
     .cart-item {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px;
-      border-bottom: 4px solid #6c6eff;
+      gap: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #eee;
+      animation: fadeIn 0.6s ease forwards;
     }
+
     .cart-item img {
-      width: 60px;
-      height: auto;
-      margin-right: 10px;
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 12px;
     }
+
     .cart-details {
       flex: 1;
-      margin-left: 10px;
     }
+
+    .cart-details h4 {
+      font-size: 1.1rem;
+      margin-bottom: 0.4rem;
+      color: var(--primary);
+    }
+
+    .cart-details p {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .item-total {
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 1.15rem;
+    }
+
     .total {
-      font-size: 18px;
-      font-weight: bold;
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--primary);
       text-align: right;
-      margin-top: 15px;
+      padding-top: 1rem;
+      border-top: 2px solid #eee;
     }
-    form {
-      margin-top: 30px;
-      padding: 20px;
-      border: 1px solid #6c6bb7;
-      border-radius: 8px;
+
+    /* Right Column - Billing & Payment */
+    .checkout-form {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
     }
-    form input, form textarea, form button, form select{
+
+    .checkout-form h2 {
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
       width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      border: 1px solid #6c63ff;
-      border-radius: 5px;
+      padding: 14px 16px;
+      border: 2px solid #ddd;
+      border-radius: 12px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
     }
-    button {
-      background: #6c63ff;
-      color: white;
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(231, 76, 60, 0.15);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    /* Payment Method Buttons */
+    .payment-methods {
+      display: flex;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .payment-btn {
+      flex: 1;
+      padding: 16px;
+      border: 2px solid #ddd;
+      background: white;
+      border-radius: 12px;
+      font-weight: 600;
       cursor: pointer;
-      border: none;
-      padding: 10px;
-      margin: 8px 0;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+      transition: all 0.4s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
     }
-    form button:hover {
-      background: #6c63ff;
+
+    .payment-btn.active,
+    .payment-btn:hover {
+      border-color: var(--accent);
+      background: rgba(231, 76, 60, 0.08);
+      color: var(--accent);
+      transform: translateY(-3px);
     }
-    .success-message {
-      background: #28a745;
+
+    .place-order-btn {
+      width: 100%;
+      background: var(--accent);
       color: white;
-      padding: 15px;
-      border-radius: 5px;
+      border: none;
+      padding: 18px;
+      font-size: 1.3rem;
+      font-weight: 700;
+      border-radius: 16px;
+      cursor: pointer;
+      margin-top: 1.5rem;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 10px 25px rgba(231, 76, 60, 0.3);
+    }
+
+    .place-order-btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 35px rgba(231, 76, 60, 0.5);
+      background: #c0392b;
+    }
+
+    /* Back Button */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+      padding: 12px 24px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* Success Message */
+    .success-message {
+      background: #27ae60;
+      color: white;
+      padding: 20px;
+      border-radius: 16px;
+      text-align: center;
       margin-top: 20px;
       display: none;
+      animation: popIn 0.5s ease;
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        margin-top: 90px;
+      }
+      
+      .order-summary, .checkout-form {
+        padding: 1.8rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .payment-methods {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
 <body>
+
   <header>
-    <h1>Checkout</h1>
+    <h1>STYLENET - Checkout</h1>
   </header>
+
   <div class="container">
-    <h2 style="text-align: center;margin-top: 80px;">Items Overview</h2>
-    <div id="cartItems"></div>
-    <div class="total" id="cartTotal"></div>
-        <button onclick="window.location.replace('cart.html')">
-      Back To cart
-    </button>
-<h2>Choose payment Method</h2>
-<button type="submit" onclick="checkoutForm()">Pay with Card</button>
-<button type="submit" onclick="changemethod()">Pay with Transfer</button>
-    <h2>Billing Details</h2>
-    <form id="checkoutform"></form>
+    <!-- Order Summary -->
+    <div class="order-summary">
+      <h2>Order Summary</h2>
+      <div id="cartItems"></div>
+      <div class="total" id="cartTotal">Total: $0.00</div>
+
+      <a href="cart.html" class="back-btn">
+        ← Back to Cart
+      </a>
+    </div>
+
+    <!-- Billing & Payment -->
+    <div class="checkout-form">
+      <h2>Billing Details</h2>
+      
+      <div class="payment-methods">
+        <button type="button" class="payment-btn active" onclick="selectPayment(this, 'card')">
+          <i class="fas fa-credit-card"></i> Pay with Card
+        </button>
+        <button type="button" class="payment-btn" onclick="selectPayment(this, 'transfer')">
+          <i class="fas fa-bank"></i> Bank Transfer
+        </button>
+      </div>
+
+      <form id="checkoutForm">
+        <!-- Card form will be injected here -->
+      </form>
+
+      <button type="button" class="place-order-btn" onclick="placeOrder()">
+        <i class="fas fa-lock"></i> Place Secure Order
+      </button>
+    </div>
+  </div>
+
+  <!-- Success Message -->
+  <div class="success-message" id="successMessage">
+    <h3>✅ Order Placed Successfully!</h3>
+    <p>Thank you for shopping with STYLENET. You'll receive a confirmation email shortly.</p>
   </div>
 
   <script>
-    // Load cart
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const cartItems = document.getElementById("cartItems");
-    const cartTotal = document.getElementById("cartTotal");
+    // Load cart from localStorage
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let currentPaymentMethod = 'card';
+
+    const cartItemsContainer = document.getElementById("cartItems");
+    const cartTotalEl = document.getElementById("cartTotal");
+    const checkoutForm = document.getElementById("checkoutForm");
+    const successMessage = document.getElementById("successMessage");
 
     let total = 0;
-    if (cart.length === 0) {
-      cartItems.innerHTML = "<p>Your cart is empty.</p>";
-    } else {
+
+    function renderCartSummary() {
+      cartItemsContainer.innerHTML = "";
+      total = 0;
+
+      if (cart.length === 0) {
+        cartItemsContainer.innerHTML = `<p style="color:#777; text-align:center; padding:2rem;">Your cart is empty.</p>`;
+        cartTotalEl.innerHTML = "Total: $0.00";
+        return;
+      }
+
       cart.forEach(item => {
+        const itemTotal = item.price * (item.quantity || 1);
+        total += itemTotal;
+
         const div = document.createElement("div");
         div.className = "cart-item";
+        
         div.innerHTML = `
-          <img src="${item.image}" alt="${item.title}"        onerror="this.onerror=null;this.src='${item.images}'">
-
+          <img src="${item.image || (item.images ? item.images[0] : 'https://via.placeholder.com/300x200?text=No+Image')}" 
+               alt="${item.title}" 
+               onerror="this.src='https://via.placeholder.com/300x200?text=Image+Not+Found'">
           <div class="cart-details">
             <h4>${item.title}</h4>
-            <p>$${item.price} × ${item.quantity}</p>
+            <p>$${parseFloat(item.price).toFixed(2)} × ${item.quantity || 1}</p>
           </div>
-          <p><b>$${(item.price * item.quantity).toFixed(2)}</b></p>
+          <div class="item-total">$${(itemTotal).toFixed(2)}</div>
         `;
-        cartItems.appendChild(div);
-        total += item.price * item.quantity;
+        cartItemsContainer.appendChild(div);
       });
-      cartTotal.innerHTML = "Total: $" + total.toFixed(2);
+
+      cartTotalEl.innerHTML = `Total: <strong>$${total.toFixed(2)}</strong>`;
     }
 
-    // Checkout form
+    // Payment method switch
+    function selectPayment(btn, method) {
+      currentPaymentMethod = method;
+      
+      // Update active button
+      document.querySelectorAll('.payment-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
 
-document.getElementById("checkoutform").addEventListener("submit", function(e) {
-  e.preventDefault();
+      // Render appropriate form
+      if (method === 'card') {
+        renderCardForm();
+      } else {
+        renderTransferForm();
+      }
+    }
 
-  window.location.href = "receipt.html"; 
-});
-    
-    function changemethod() {
-      checkoutform.innerHTML=`
-      <div>
-        <p><strong>Account-Name: </strong> <span>StyleNet Limited</span></p>
-        <p><strong>Account-Number: </strong><span>3763261576</span></p>
-        <p><strong>Bank-Name: </strong><span>Providus-Bank</span></p>
-        <a href="receipt.html">I have Sent the money</a>
-      </div>
-      `
+    function renderCardForm() {
+      checkoutForm.innerHTML = `
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="fullName" placeholder="John Doe" required>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="email" placeholder="you@example.com" required>
+        </div>
+        <div class="form-group">
+          <label>Shipping Address</label>
+          <textarea id="address" placeholder="123 Fashion Street, Lagos" required></textarea>
+        </div>
+        <div class="form-group">
+          <label>Card Number</label>
+          <input type="text" id="cardNumber" placeholder="4242 4242 4242 4242" maxlength="19" required>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label>Expiry Date (MM/YY)</label>
+            <input type="text" id="expiry" placeholder="12/28" maxlength="5" required>
+          </div>
+          <div class="form-group">
+            <label>CVV</label>
+            <input type="text" id="cvv" placeholder="123" maxlength="4" required>
+          </div>
+        </div>
+      `;
     }
-    function checkoutForm() {
-      checkoutform.innerHTML=`
-      <input type="text" placeholder="Full Name" required>
-      <input type="email" placeholder="Email Address" required>
-      <textarea placeholder="Shipping Address" rows="3" required></textarea>
-            <input type="number" placeholder="Card Number" maxlength="16" minlength="12" required>
-      <input type="number" placeholder="Expiry Date (MM/YY)" minlength="4" maxlength="4" required>
-      <input type="number" placeholder="CVV" maxlength="4" minlength="3" required>
-      <select required>
-        <option value="">Select Payment Method</option>
-        <option value="card">Credit Card</option>
-        <option value="Debit Card">Debit Card</option>
-        <
-      </select>
-      <button type="submit">Place Order</button>
-    `
+
+    function renderTransferForm() {
+      checkoutForm.innerHTML = `
+        <div style="background:#f8f9fa; padding:1.5rem; border-radius:12px; margin:1.5rem 0;">
+          <h3 style="color:var(--primary);">Bank Transfer Details</h3>
+          <p><strong>Account Name:</strong> StyleNet Limited</p>
+          <p><strong>Account Number:</strong> 3763261576</p>
+          <p><strong>Bank Name:</strong> Providus Bank</p>
+          <p style="margin-top:1rem; color:#e74c3c; font-weight:600;">
+            Please make payment within 30 minutes to avoid cancellation.
+          </p>
+        </div>
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="fullName" placeholder="John Doe" required>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="email" placeholder="you@example.com" required>
+        </div>
+        <div class="form-group">
+          <label>Shipping Address</label>
+          <textarea id="address" placeholder="123 Fashion Street, Lagos" required></textarea>
+        </div>
+      `;
     }
+
+    // Place Order
+    function placeOrder() {
+      if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+      }
+
+      // Simple validation
+      const name = document.getElementById("fullName");
+      const email = document.getElementById("email");
+
+      if (!name || !email || !name.value || !email.value) {
+        alert("Please fill in all required fields.");
+        return;
+      }
+
+      // Show success
+      successMessage.style.display = "block";
+      
+      // Clear cart after successful order
+      setTimeout(() => {
+        localStorage.removeItem("cart");
+        window.location.href = "receipt.html"; // or index.html
+      }, 2500);
+    }
+
+    // Initialize
+    window.onload = () => {
+      renderCartSummary();
+      renderCardForm(); // Default to card payment
+    };
   </script>
 </body>
 </html>

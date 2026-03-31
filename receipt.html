@@ -3,137 +3,405 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Receipt - STYLENET</title>
+  <title>STYLENET - Order Receipt</title>
   <style>
-    body {
-      font-family: sans-serif;
+    :root {
+      --primary: #2C3E50;
+      --secondary: #ECF0F1;
+      --accent: #E74C3C;
+      --text: #2C3E50;
+    }
+
+    * {
       margin: 0;
       padding: 0;
-      background: #f5f5f5;
+      box-sizing: border-box;
     }
-    .container {
-      max-width: 700px;
-      margin: 30px auto;
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: linear-gradient(135deg, var(--secondary), #f0f2f5);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 20px 10px;
+    }
+
+    .receipt-container {
+      max-width: 720px;
+      margin: 40px auto;
       background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+      overflow: hidden;
     }
-    h1, h2 {
-      text-align: center;
-    }
-    .status {
-      text-align: center;
-      padding: 10px;
-      background: #28a745;
+
+    /* Header */
+    .receipt-header {
+      background: var(--primary);
       color: white;
-      font-weight: bold;
-      border-radius: 6px;
-      margin-bottom: 20px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      position: relative;
     }
-    .info {
-      margin: 15px 0;
-      padding: 10px;
-      background: #f9f9f9;
-      border-radius: 6px;
+
+    .receipt-header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(to right, var(--accent), #c0392b);
     }
-    .info p {
-      margin: 5px 0;
-      font-size: 14px;
+
+    .logo {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      letter-spacing: -2px;
     }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #27ae60;
+      color: white;
+      padding: 12px 28px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin: 1rem 0;
+      box-shadow: 0 8px 20px rgba(39, 174, 96, 0.3);
+      animation: popIn 0.6s ease;
+    }
+
+    /* Content */
+    .receipt-content {
+      padding: 2.5rem;
+    }
+
+    .order-info {
+      background: var(--secondary);
+      padding: 1.8rem;
+      border-radius: 16px;
+      margin-bottom: 2rem;
+    }
+
+    .order-info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+
+    .info-item h4 {
+      color: var(--accent);
+      font-size: 0.95rem;
+      margin-bottom: 4px;
+    }
+
+    .info-item p {
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    h2 {
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 1.8rem;
+      font-size: 1.8rem;
+    }
+
+    /* Items */
+    #receiptItems {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
     .product {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #ddd;
-      padding: 10px 0;
+      gap: 1.2rem;
+      padding: 1.2rem;
+      background: white;
+      border: 1px solid #eee;
+      border-radius: 16px;
+      transition: all 0.3s ease;
     }
+
+    .product:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    }
+
     .product img {
-      width: 60px;
-      height: auto;
-      margin-right: 10px;
+      width: 85px;
+      height: 85px;
+      object-fit: cover;
+      border-radius: 12px;
     }
+
     .details {
       flex: 1;
-      margin-left: 10px;
     }
-    .total {
-      text-align: right;
-      font-size: 18px;
-      font-weight: bold;
-      margin-top: 15px;
+
+    .details h4 {
+      color: var(--primary);
+      margin-bottom: 6px;
+      line-height: 1.3;
     }
-    .btn-home {
-      display: block;
-      width: 70%;
-      padding: 12px;
-      margin-top: 20px;
-      text-align: center;
-      background: #7c6bff;
+
+    .details p {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .product-total {
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--accent);
+      align-self: center;
+    }
+
+    /* Total */
+    .grand-total {
+      background: var(--primary);
       color: white;
-      text-decoration: none;
-      border-radius: 6px;
-      justify-self: center;
+      padding: 1.8rem;
+      border-radius: 16px;
+      text-align: right;
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin: 2rem 0;
     }
+
+    .grand-total span {
+      font-size: 2rem;
+    }
+
+    /* Buttons */
+    .action-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 16px 24px;
+      border: none;
+      border-radius: 16px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      min-width: 160px;
+    }
+
+    .btn-home {
+      background: var(--accent);
+      color: white;
+    }
+
     .btn-home:hover {
-      background: #555;
+      background: #c0392b;
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(231, 76, 60, 0.4);
+    }
+
+    .btn-print {
+      background: transparent;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+
+    .btn-print:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* Footer Note */
+    .thank-you {
+      text-align: center;
+      margin-top: 2.5rem;
+      color: #666;
+      font-style: italic;
+    }
+
+    /* Animations */
+    @keyframes popIn {
+      0% { transform: scale(0.6); opacity: 0; }
+      60% { transform: scale(1.15); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .fade-in {
+      animation: fadeInUp 0.7s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .receipt-container {
+        margin: 20px auto;
+        border-radius: 18px;
+      }
+      
+      .receipt-content {
+        padding: 1.8rem 1.5rem;
+      }
+      
+      .order-info-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .action-buttons {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>STYLENET</h1>
-    <div class="status">✅ Payment Successful</div>
-    <h2>Receipt</h2>
 
-    <div class="info">
-      <p><b>Order ID:</b> <span id="orderId"></span></p>
-      <p><b>Date:</b> <span id="orderDate"></span></p>
-      <p><b>Status:</b> Successful</p>
+  <div class="receipt-container">
+    <!-- Header -->
+    <div class="receipt-header">
+      <div class="logo">STYLENET</div>
+      <div class="status">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle-check-icon lucide-message-circle-check"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/><path d="m9 12 2 2 4-4"/></svg>
+        Payment Successful
+      </div>
+      <h1 style="margin-top: 10px; font-size: 1.6rem;">Thank You for Your Order!</h1>
     </div>
 
-    <div id="receiptItems"></div>
-    <div class="total" id="receiptTotal"></div>
+    <!-- Content -->
+    <div class="receipt-content">
+      <h2>Order Receipt</h2>
 
-    <a href="index.html" class="btn-home">Back to Home</a>
+      <!-- Order Info -->
+      <div class="order-info">
+        <div class="order-info-grid">
+          <div class="info-item">
+            <h4>Order ID</h4>
+            <p id="orderId">STY-000000</p>
+          </div>
+          <div class="info-item">
+            <h4>Date & Time</h4>
+            <p id="orderDate"></p>
+          </div>
+          <div class="info-item">
+            <h4>Status</h4>
+            <p style="color:#27ae60; font-weight:700;">✓ Confirmed</p>
+          </div>
+          <div class="info-item">
+            <h4>Payment Method</h4>
+            <p id="paymentMethod">Credit Card / Bank Transfer</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Items -->
+      <div id="receiptItems"></div>
+
+      <!-- Grand Total -->
+      <div class="grand-total">
+        Total Paid: <span id="receiptTotal">$0.00</span>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <a href="index.html" class="btn btn-home">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house-icon lucide-house"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          Back to Home
+        </a>
+        <button onclick="window.print()" class="btn btn-print">
+          <i class="fas fa-print"></i> Print Receipt
+        </button>
+      </div>
+
+      <div class="thank-you">
+        We hope you love your new style!<br>
+        — The STYLENET Team ❤️
+      </div>
+    </div>
   </div>
 
   <script>
     // Generate Order ID and Date
-    const orderId = "STY" + Math.floor(Math.random() * 1000000);
-    const now = new Date().toLocaleString();
-
+    const orderId = "STY" + String(Math.floor(100000 + Math.random() * 900000));
+    const now = new Date();
+    const dateOptions = { 
+      weekday: 'long', 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    };
+    
     document.getElementById("orderId").textContent = orderId;
-    document.getElementById("orderDate").textContent = now;
+    document.getElementById("orderDate").textContent = now.toLocaleDateString('en-US', dateOptions);
 
-    // Load purchased items
+    // Load cart items from localStorage
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     const receiptItems = document.getElementById("receiptItems");
-    const receiptTotal = document.getElementById("receiptTotal");
+    const receiptTotalEl = document.getElementById("receiptTotal");
 
     let total = 0;
-    if (cart.length === 0) {
-      receiptItems.innerHTML = "<p>No items found in your purchase.</p>";
-    } else {
-      cart.forEach(item => {
-        const div = document.createElement("div");
-        div.className = "product";
-        div.innerHTML = `
-                <img src="${item.images}" alt="${item.title}" onerror="this.onerror=null;this.src='${item.image}'">
 
+    if (cart.length === 0) {
+      receiptItems.innerHTML = `
+        <div style="text-align:center; padding:3rem; color:#777;">
+          <i class="fas fa-receipt" style="font-size:4rem; opacity:0.3; margin-bottom:1rem;"></i>
+          <p>No items found in this order.</p>
+        </div>`;
+    } else {
+      cart.forEach((item, index) => {
+        const itemTotal = (item.price * (item.quantity || 1)).toFixed(2);
+        total += parseFloat(itemTotal);
+
+        const div = document.createElement("div");
+        div.className = "product fade-in";
+        div.style.animationDelay = `${index * 120}ms`;
+
+        div.innerHTML = `
+          <img src="${item.image || (item.images ? item.images[0] : 'https://via.placeholder.com/300x200?text=STYLENET')}" 
+               alt="${item.title}" 
+               onerror="this.src='https://via.placeholder.com/300x200?text=Product'">
+          
           <div class="details">
             <h4>${item.title}</h4>
-            <p>$${item.price} × ${item.quantity}</p>
+            <p>$${parseFloat(item.price).toFixed(2)} × ${item.quantity || 1}</p>
           </div>
-          <p><b>$${(item.price * item.quantity).toFixed(2)}</b></p>
+          
+          <div class="product-total">
+            $${itemTotal}
+          </div>
         `;
         receiptItems.appendChild(div);
-        total += item.price * item.quantity;
       });
-      receiptTotal.innerHTML = "Total: $" + total.toFixed(2);
+
+      receiptTotalEl.textContent = "$" + total.toFixed(2);
     }
 
-    
+    // Optional: Clear cart after showing receipt (uncomment if desired)
+    // setTimeout(() => {
+    //   localStorage.removeItem("cart");
+    // }, 3000);
   </script>
 </body>
 </html>
